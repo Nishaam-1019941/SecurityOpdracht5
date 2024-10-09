@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encrypt/Decrypt Webapp</title>
+</head>
+<body>
+    <h1>Versleutel/Onstleutel Tekst</h1>
+
+    <h2>Versleutel een bericht:</h2>
+    <form action="/encrypt" method="POST">
+        <label>Bericht:</label>
+        <input type="text" name="message" required><br>
+        <label>Sleutel (16 tekens max):</label>
+        <input type="text" name="key" required><br>
+        <input type="submit" value="Versleutel">
+    </form>
+    {% if encrypted_message %}
+        <h2>Versleuteld bericht:</h2>
+        <textarea readonly>{{ encrypted_message }}</textarea>
+    {% endif %}
+
+    <h2>Ontsleutel een bericht:</h2>
+    <form action="/decrypt" method="POST">
+        <label>Versleuteld bericht:</label>
+        <input type="text" name="encrypted_message" required><br>
+        <label>Sleutel:</label>
+        <input type="text" name="key" required><br>
+        <input type="submit" value="Ontsleutel">
+    </form>
+    {% if decrypted_message %}
+        <h2>Ontsleuteld bericht:</h2>
+        <p>{{ decrypted_message }}</p>
+    {% endif %}
+    {% if error %}
+        <h2 style="color: red;">{{ error }}</h2>
+    {% endif %}
+</body>
+</html>
